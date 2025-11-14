@@ -16,7 +16,7 @@ export const login = async (req, res) => {
     const userObj = user.toObject();
     delete userObj.password;
 
-    res.json({ token: generateToken({ user: { _id: userObj._id } }), user: userObj });
+    res.json({ token: generateToken({ payload: { _id: userObj._id } }), user: userObj });
 }
 
 export const register = async (req, res) => {
@@ -30,5 +30,5 @@ export const register = async (req, res) => {
     const userObj = user.toObject();
     delete userObj.password;
 
-    res.status(201).json({ token: generateToken({ user: { _id: userObj._id } }), user: userObj });
+    res.status(201).json({ token: generateToken({ payload: { _id: userObj._id } }), user: userObj });
 }

@@ -1,6 +1,7 @@
+import User from "../models/User.js";
 import { verifyToken } from "../utilities/jwt.js";
 
-const protect = (req, res, next) => {
+const protect = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith("Bearer "))
@@ -11,7 +12,7 @@ const protect = (req, res, next) => {
   const decoded = verifyToken(token);
   if (!decoded) return res.status(401).json({ message: "Invalid token" });
   
-  req.user = decoded.user;
+  req.user = await User.findById(decoded?.payload?._id);
   next();
 };
 

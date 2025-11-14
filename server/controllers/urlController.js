@@ -19,7 +19,7 @@ export const createShortUrl = async (req, res) => {
             }
         }
 
-        const url = new Url({ longUrl: originalUrl, shortCode });
+        const url = new Url({ longUrl: originalUrl, shortCode, userId: req.user._id });
         await url.save();
 
         res.json({ originalUrl: url.longUrl, shortUrl: url.shortUrl, shortCode: url.shortCode, isActive: url.isActive, clicks: url.clicks });
@@ -58,7 +58,7 @@ export const getInfo = async (req, res) => {
 
 export const getUrls = async (req, res) => {
     try {
-        const url = await Url.find().sort({ createdAt: -1 });
+        const url = await Url.find({ userId: req.user._id }).sort({ createdAt: -1 });
         if (!url) return res.status(404).json({ message: 'Not found' });
         res.json(url);
     } catch (err) {
@@ -80,6 +80,9 @@ export const urlStats = async (req, res) => {
                 $facet: {
                     overallStats: [
                         {
+                            $match: { userId: req.user._id }
+                        },
+                        {
                             $group: {
                                 _id: null,
                                 totalUrls: { $sum: 1 },
@@ -90,7 +93,7 @@ export const urlStats = async (req, res) => {
 
                     todayStats: [
                         {
-                            $match: { updatedAt: { $gte: start, $lte: end } }
+                            $match: { updatedAt: { $gte: start, $lte: end }, userId: req.user._id }
                         },
                         {
                             $group: {
@@ -102,7 +105,7 @@ export const urlStats = async (req, res) => {
 
                     todayCreatedUrls: [
                         {
-                            $match: { createdAt: { $gte: start, $lte: end } }
+                            $match: { createdAt: { $gte: start, $lte: end }, userId: req.user._id }
                         },
                         {
                             $group: {
