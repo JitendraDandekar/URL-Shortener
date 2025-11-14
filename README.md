@@ -94,7 +94,7 @@ root/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/yourrepo/url-shortener.git
+git clone https://github.com/JitendraDandekar/URL-Shortener.git
 cd UrlShortener
 ```
 
@@ -171,35 +171,6 @@ View analytics data.
 
 ---
 
-## 🧪 Testing
-
-Run tests using:
-
-```bash
-npm test
-```
-
----
-
-## 🙌 Contribution Guidelines
-
-1. Fork the repository
-2. Create a new feature branch
-3. Commit your changes
-4. Push branch & create pull request
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License**.
-
----
-
-If you'd like, I can also generate:
-✅ `CONTRIBUTING.md`
-✅ Full folder structure
-✅ API documentation (Swagger)
-✅ ERD diagram
-
-Just tell me!
+### Screenshots
+<img width="1907" height="948" alt="image" src="https://github.com/user-attachments/assets/946b6fdc-1ad8-4d22-81a8-30e85cde70a7" />
+<img width="1911" height="952" alt="image" src="https://github.com/user-attachments/assets/1a7275e1-9cd3-4f98-9b21-ab5fa66907a3" />
